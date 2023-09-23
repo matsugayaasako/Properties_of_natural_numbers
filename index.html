@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自然数の性質</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>自然数の性質</h1>
+    <section>
+        <form action="#" id="forma">
+            <h3 id="number">ここに自然数を入力</h3>
+            <input type="text" name="number">
+            <input type="submit" value="調べる">
+        </form>
+        <form action="#" id="formf">
+            <input type="submit" value="クリア">
+        </form>
+        <p id="output"></p>
+        <p id="output2"></p>
+        <p id="output3"></p>
+        <p id="output5"></p>
+        <p id="output6"></p>
+        <p id="output7"></p>
+        <form name="forma0">
+        <h3>用語の説明</h3>
+            <select name="setsumei">
+                <option value="sosu">素数とは</option>
+                <option value="goseisu">合成数とは</option>
+                <option value="Mersenne">メルセンヌ数とは</option>
+                <option value="Mersennesosu">メルセンヌ素数とは</option>
+                <option value="supersosu">スーパー素数とは</option>
+                <option value="hannsosu">半素数とは</option>
+                <option value="kanzensu">完全数とは</option>
+                <option value="kazyosu">過剰数とは</option>
+                <option value="husokusu">不足数とは</option>
+            </select>
+        </form>
+        <form action="#" id="form0">
+            <input type="submit" value="説明を表示">
+        </form> 
+        <ul id="output4"></ul>
+        <form name="forma1">
+            <h3>背景の色</h3>
+            <select name="color">
+                <option value="#aaaaaa">灰色</option>
+                <option value="#ff4444">赤</option>
+                <option value="#ff8000">オレンジ</option>
+                <option value="#eeee00">黄色</option>
+                <option value="#78f000">黄緑</option>
+                <option value="#00dd00">緑</option>
+                <option value="#00ffff">水色</option>
+                <option value="#0088ff">青</option>
+                <option value="#bb00ff">紫</option>
+                <option value="#ff80ff">ピンク</option>
+            </select>
+        </form>
+        <form action="#" id="form">
+            <input type="submit" value="この背景色に変換">
+        </form>    
+    </section>
+    <script>
+        'use strict'
+        document.body.style.backgroundColor = '#aaaaaa';
+        let soinnsuu;
+        let color = null;
+        let todo = [];
+        let setsumei = null;
+        let numa = null;
+        let numb = null;
+        document.getElementById('output').textContent = `${''}`;
+        document.getElementById('output2').textContent = `${''}`;
+        document.getElementById('output3').textContent = `${''}`;
+        document.getElementById('output4').textContent = `${''}`;
+        document.getElementById('output5').textContent = `${''}`;
+        document.getElementById('output6').textContent = `${''}`;
+        document.getElementById('output7').textContent = `${''}`;
+        document.getElementById('form').onsubmit = function(event) {
+            numb = document.forma1.color.selectedIndex;
+            event.preventDefault();
+            color = document.forma1.color.options[numb].value;
+            document.body.style.backgroundColor = color;
+        }
+        document.getElementById('forma').onsubmit = function(event){
+            event.preventDefault();
+            let a2 = document.getElementById('forma').number.value;
+            let M = Math.log2(a2-(-1));
+            let A = 1;
+            let B = a2;
+            let C = null;
+            let D = null;
+            let E = 0;
+            let n = 0;
+            let long1 = 0;
+            if(a2 < 1 || Math.floor(a2) != a2){
+                window.alert('自然数を入れてください。自然数とは、０より大きい整数です。');
+            }else{
+                if(a2%2 == 0){
+                    document.getElementById('output').textContent = `${a2+'は偶数'}`;
+                }else if(Math.floor(a2) == a2){
+                    document.getElementById('output').textContent = `${a2+'は奇数'}`;
+                }
+                if(B == Math.floor(B) && B > 1){
+                    for (let a = 0; a <= B-1; a++) {
+                    C = 2;
+                    D = null;
+                    for (let c = 0;  c < Math.sqrt(A);  c++){
+                        if ((Math.floor(A/C) == A/C && D == null) && C < A){
+                            D = 0;
+                            if(A == B){
+                                document.getElementById('output2').textContent = `${B+'は合成数'}`;
+                            }
+                        }
+                        if (C > Math.sqrt(A) && D == null){
+                            D = 1;
+                            if(A == B){
+                                let C2 = 2;
+                                let D2 = null;
+                                for (let c = 0;  c <= E;  c++){
+                                    if (((Math.floor(E/C2) == E/C2 && D2 == null) && C2 < E)||E == 1){
+                                        D2 = 0;
+                                        document.getElementById('output2').textContent = `${B+'は'+E+'番目の素数'}`;
+                                    }
+                                    if (C2 == E && D2 == null){
+                                        D2 = 1;
+                                        document.getElementById('output2').textContent = `${B+'は'+E+'番目の素数　さらに'+E+'も素数なので'+B+'はスーパー素数である。'}`;
+                                    }
+                                    C2++
+                                }
+                            }
+                            E++
+                        }
+                        C++
+                    }
+                    A++
+                }
+                }else{
+                    D = 0;
+                    document.getElementById('output2').textContent = `${B+'は素数でも合成数でもない'}`;
+                }
+                if(M == Math.floor(M)){
+                    if(D == 0){
+                        document.getElementById('output3').textContent = `${a2+'は'+M+'番目のメルセンヌ数。'}`;
+                    }else{
+                        document.getElementById('output3').textContent = `${a2+'は'+M+'番目のメルセンヌ数。さらに、この数はメルセンヌ素数。'}`;
+                    }
+                }else{
+                    document.getElementById('output3').textContent = `${a2+'はメルセンヌ数ではない'}`;
+                }
+                sosuhantei(a2,1); 
+                let todo2 = [1];
+                for(let d = 0; d < todo.length; d++){
+                    let long2 = todo2.length;
+                    for (let e = 0; e < long2; e++){
+                        todo2.push(todo2[e]*todo[d]);
+                    }
+                }
+                let long2 = todo2.length;
+                narabikae();
+                let yakusu = [];
+                yakusu.push(todo2[0]);
+                for(let i = 1; i < todo2.length; i++){
+                    if(todo2[i] != todo2[i-1]){
+                        yakusu.push(todo2[i]);
+                    }
+                }
+                let sum = 0;
+                let j = 0;
+                for(let i = 0; i < yakusu.length; i++){
+                    sum = sum+yakusu[j];
+                    console.log(sum);
+                    j++;
+                }
+                console.log(sum);
+                if(sum > 2*a2){
+                    document.getElementById('output7').textContent = `${a2+'は過剰数'}`;
+                }else if(sum < 2*a2){
+                    document.getElementById('output7').textContent = `${a2+'は不足数'}`;
+                }else{
+                    document.getElementById('output7').textContent = `${a2+'は完全数'}`;
+                }
+                document.getElementById('output6').textContent = `${a2+'の約数は、'+yakusu}`;
+
+                function narabikae(){
+                    let dummy;
+                    let check = 0;
+                    for(let i = 0; i < todo2.length; i++){
+                        if(todo2[i] > todo2[i+1]){
+                            dummy = todo2[i];
+                            todo2[i] = todo2[i+1];
+                            todo2[i+1] = dummy;
+                            check = 1;
+                        }
+                    }
+                    if (check == 1){
+                        check = 0;
+                        narabikae();
+                    } 
+                }
+                todo2 = [];
+                yakusu = [];
+                todo = [];
+	            function sosuhantei(A,long){
+                    if(A > 1){
+                        C = 2;
+                        D = null;
+                        for (let c = 0;  c < Math.sqrt(A);  c++){
+                            if (Math.floor(A/C) == A/C && D == null && C < A){
+                                D = 0;        
+		                        todo.push(C);
+		                        sosuhantei(A/C,long+1);   
+                            }
+                            if (C-Math.sqrt(A) >= 0 && D == null){
+                                D = 1;
+			                    todo.push(A);
+                                if(long == 2){
+                                    document.getElementById('output5').textContent = `${a2+'を素因数分解すると、'+todo+' 　また素因数の数が2個なので、この数は半素数。'}`;
+                                }else{
+                                    document.getElementById('output5').textContent = `${a2+'を素因数分解すると、'+todo}`;
+                                }
+                            }
+                            C++;
+                        }
+                    }else{
+                        D = 0;
+                        document.getElementById('output5').textContent = `${a2+'を素因数分解すると、1'}`;
+                    }
+                }   
+            }
+        }
+        document.getElementById('formf').onsubmit = function(event) {
+            event.preventDefault();
+            let a2 = null;
+            document.getElementById('output').textContent = `${''}`;
+            document.getElementById('output2').textContent = `${''}`;
+            document.getElementById('output3').textContent = `${''}`;
+            document.getElementById('output5').textContent = `${''}`;
+            document.getElementById('output6').textContent = `${''}`;
+            document.getElementById('output7').textContent = `${''}`;
+        }
+        document.getElementById('form0').onsubmit = function(event){
+            numa = document.forma0.setsumei.selectedIndex;
+            event.preventDefault();
+            setsumei = document.forma0.setsumei.options[numa].value;
+            if(setsumei == 'sosu'){
+                document.getElementById('output4').textContent = `${'素数とは、約数が１とその数しかない自然数。'}`;
+            }
+            if(setsumei == 'goseisu'){
+                document.getElementById('output4').textContent = `${'合成数とは、素数ではない１以外の自然数。合成数は、２つ以上の素数の積で表される。'}`;
+            }
+            if(setsumei == 'Mersenne'){
+                document.getElementById('output4').textContent = `${'メルセンヌ数とは、２の累乗から１を引いた自然数。'}`;
+            }
+            if(setsumei == 'Mersennesosu'){
+                document.getElementById('output4').textContent = `${'メルセンヌ素数とは、メルセンヌ数でかつ素数である数。'}`;
+            }
+            if(setsumei == 'supersosu'){
+                document.getElementById('output4').textContent = `${'スーパー素数とは、素数のうち、素数番目の素数のこと。'}`;
+            }
+            if(setsumei == 'hannsosu'){
+                document.getElementById('output4').textContent = `${'半素数とは、2つの素数の積で表される合成数のこと。'}`;
+            }
+            if(setsumei == 'kanzensu'){
+                document.getElementById('output4').textContent = `${'完全数とは、その数以外の約数の和がその数になる自然数。'}`;
+            }
+            if(setsumei == 'husokusu'){
+                document.getElementById('output4').textContent = `${'不足数とは、その数以外の約数の和がその数より小さい自然数。'}`;
+            }
+            if(setsumei == 'kazyosu'){
+                document.getElementById('output4').textContent = `${'過剰数とは、その数以外の約数の和がその数より大きい自然数。'}`;
+            }
+            console.log(setsumei);   
+        }
+    </script>
+</body>
+</html>
